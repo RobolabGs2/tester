@@ -1,0 +1,41 @@
+before:
+  hooks:
+    - go mod download
+
+builds:
+  -
+    binary: tester
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -w -s -extldflags "-static"
+    goos:
+      - windows
+# TODO: switch on after solve `exec.Command("cmd"...)` problem
+#      - darwin
+#      - linux
+#      - freebsd
+
+archives:
+  -
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore'
