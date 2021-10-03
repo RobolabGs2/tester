@@ -1,0 +1,49 @@
+<html lang="en">
+<head><title></title>
+    {{- /*gotype: dont-panic/mars-lander/checker.TemplateData*/ -}}
+    {{ .Styles }}
+</head>
+<body class="main">
+<article class="reports">
+    {{ range $reportID, $report := .Report }}
+	 <article class="test-report" id="report-{{ $reportID }}" {{ if ne 0 $reportID }}style="display: none;"{{end}} >
+	  <div style="border: black 1px solid">{{ .Image }}</div>
+	  <article class="scrollable-container">
+          {{ $turnsTotal := len .Turns }}
+          {{ range $i, $turn := .Turns }}
+		   <article class="turn">
+			<header class="turn__header">
+			 <section class="turn__time">{{ $turn.Time }}</section>
+			 <section class="turn__index">{{ $i }}/{{ $turnsTotal }} </section>
+			</header>
+			<section class="turn__data">
+                {{ with .Info }} <section class="turn__info"><pre>{{ . }}</pre></section> {{ end }}
+                {{ with .Input }} <section class="turn__input"><pre>{{ . }}</pre></section> {{ end }}
+                {{ with .Output }} <section class="turn__output"><pre>{{ . }}</pre></section> {{ end }}
+                {{ with .Logs }} <section class="turn__logs"><pre>{{ . }}</pre></section> {{ end }}
+			</section>
+		   </article>
+          {{ end }}
+	  </article>
+	 </article>
+    {{ end }}
+</article>
+<section class="main__right-column">
+ <article class="reports-index">
+     {{ range $reportID, $report := .Report }}
+	  <button class="reports-index__report reports-index__report_{{if .Success}}success{{else}}failed{{end}}"
+	          onclick="
+			          document.
+			          querySelectorAll('.test-report').
+			          forEach(r => r.style.display = (r.id === 'report-{{$reportID}}') ? '' : 'none');
+			          document.querySelector('.report-summary').textContent = '{{ js .Summary }}';
+			          "
+	          title="{{.Summary}}">{{.Name}}</button>
+     {{ end }}
+ </article>
+ <article class="report-summary">
+     {{ with index .Report 0 }}{{ .Summary }}{{ end }}
+ </article>
+</section>
+</body>
+</html>

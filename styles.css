@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    display: flex;
+}
+
+.main__right-column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 3;
+    border-left: 1px lightgray solid;
+}
+
+.reports-index {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    box-sizing: border-box;
+    flex: 7;
+}
+
+.reports-index__report {
+    padding: 4px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+    border-bottom: 1px grey solid;
+}
+
+.report-summary {
+    flex: 4;
+    border-top: 1px grey solid;
+    padding: 8px;
+}
+
+.reports-index__report_success {
+    background-color: rgba(74, 173, 109, .1);
+}
+
+.reports-index__report_success:hover {
+    background-color: rgba(74, 173, 109, .5);
+}
+
+.reports-index__report_failed {
+    background-color: rgba(229, 50, 56, .1);
+}
+
+.reports-index__report_failed:hover {
+    background-color: rgba(229, 50, 56, .5);
+}
+
+.reports {
+    flex: 7;
+}
+
+.test-report {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.turn {
+    color: #454c55;
+    font-family: "Inconsolata", consolas, monospace !important;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    border-bottom: 1px grey solid;
+    padding: 8px;
+}
+
+.turn__header {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    margin: 4px;
+    width: 164px;
+}
+
+.turn__data {
+    flex: 4;
+}
+
+pre {
+    font-family: "Inconsolata", consolas, monospace !important;
+    white-space: pre-wrap;
+}
+
+
+.turn__data *:before {
+    font-weight: bold;
+    color: #454c55;
+}
+
+.turn__info:before {
+    content: "Game information:";
+}
+
+.turn__time {
+}
+
+.turn__time:before {
+    content: "Time: ";
+}
+
+.turn__input:before {
+    content: "Standart Input Stream";
+}
+
+.turn__output:before {
+    content: "Standart Output Stream";
+}
+
+.turn__logs {
+    color: #e53238;
+}
+
+.turn__logs:before {
+    content: "Standart Error Stream";
+}
+
+.scrollable-container {
+    overflow-y: auto;
+}
